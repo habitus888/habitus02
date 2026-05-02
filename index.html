@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Habitus English Lab</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary-color: #4f46e5;
+  --secondary-color: #10b981;
+  --accent-color: #f59e0b;
+  --bg-gradient: linear-gradient(135deg, #f5f7ff 0%, #e4eaff 100%);
+}
+
+body {
+  font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+  background: var(--bg-gradient);
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  color: #1e293b;
+  overflow-x: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 70px; /* 헤더 높이 축소 */
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+#logo {
+  position: absolute;
+  left: 15px;
+  width: 90px;
+}
+
+.title {
+  font-size: 20px; /* 타이틀 크기 축소 */
+  font-weight: 800;
+  background: linear-gradient(to right, #4f46e5, #9333ea);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.start { 
+  position: absolute;
+  right: 15px;
+  background: var(--secondary-color);
+  font-size: 13px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.container {
+  max-width: 800px;
+  margin: 15px auto; /* 상단 여백 축소 */
+  background: white;
+  padding: 20px 25px; /* 내부 패딩 축소 */
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(79, 70, 229, 0.08);
+}
+
+#questionNumber { font-size: 14px; color: #94a3b8; margin-bottom: 5px; font-weight: 600; }
+
+h3 { font-size: 12px; color: #b1bccd; text-transform: uppercase; margin: 10px 0 5px; letter-spacing: 0.5px; }
+
+/* 해석 박스 크기 최적화 */
+#koreanBox {
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 600;
+  margin: 5px 0 15px;
+  padding: 15px 20px;
+  background: #f8faff;
+  border-left: 4px solid var(--primary-color);
+  border-radius: 12px;
+  word-break: keep-all;
+  min-height: 40px; /* 최소 높이 대폭 축소 */
+}
+
+/* 단어 조각 박스 */
+#wordBox { 
+  min-height: 60px; 
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 8px; 
+  margin-bottom: 15px; 
+}
+
+#wordBox button {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #e2e8f0;
+  background: white;
+  color: #334155;
+  cursor: pointer;
+}
+
+/* 정답 박스 크기 최적화 */
+#answerBox {
+  font-size: 18px;
+  min-height: 50px; /* 높이 축소 */
+  margin-bottom: 15px;
+  padding: 15px;
+  background: #f1f5f9;
+  border-radius: 15px;
+  border: 2px dashed #cbd5e1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.answer-word {
+  background: var(--primary-color);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.main-btn {
+  font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.1s;
+}
+
+.check { background: var(--primary-color); font-size: 15px; padding: 12px 24px; margin-right: 5px; }
+.next { background: var(--accent-color); font-size: 15px; padding: 12px 24px; }
+
+#result { font-size: 16px; margin-top: 15px; font-weight: 700; min-height: 20px; }
+
+.footer { margin-top: 15px; padding-bottom: 20px; font-size: 11px; color: #94a3b8; }
+
+@media (max-width: 600px) {
+  .container { margin: 10px; padding: 15px; }
+  #logo { display: none; }
+  .title { font-size: 17px; }
+  #koreanBox { font-size: 16px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <img src="logo.png" id="logo" alt="Logo">
+  <div class="title">Habitus English Lab</div>
+  <button class="start" onclick="startGame()">학습 시작</button>
+</div>
+
+<div class="container">
+  <div id="questionNumber">Question 0 / 0</div>
+  
+  <h3>Translation</h3>
+  <div id="koreanBox">학습 시작 버튼을 눌러주세요.</div>
+
+  <h3>Scrambled Phrases</h3>
+  <div id="wordBox"></div>
+
+  <h3>Your Sentence</h3>
+  <div id="answerBox"></div>
+
+  <div>
+    <button class="main-btn check" onclick="checkAnswer()">정답 확인</button>
+    <button class="main-btn next" onclick="nextSentence()">다음 문제</button>
+  </div>
+
+  <p id="result"></p>
+</div>
+
+<div class="footer">
+  ⓒViolet Youn Habitus. All Rights reserved.
+</div>
+
+<script>
+const correctSound = new Audio("https://actions.google.com/sounds/v1/crowd/applause.ogg");
+const wrongSound = new Audio("https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg");
+
+let sentences = [
+  "One valuable technique for getting out of helplessness, depression, and situations which are predominantly being run by the thought, “I can’t,” is to choose to be with other persons who have resolved the problem with which we struggle.",
+  "This is one of the great powers of selfhelp groups.",
+  "When we are in a negative state, we have given a lot of energy to negative thought forms, and the positive thought forms are weak.",
+  "Those who are in a higher vibration are free of the energy from their negative thoughts and have energized positive thought forms.",
+  "Merely to be in their presence is beneficial.",
+  "In some selfhelp groups, this is called “hanging out with the winners.”",
+  "The benefit here is on the psychic level of consciousness, and there is a transfer of positive energy and relighting of one’s own latent positive thought forms."
+];
+
+let meanings = [
+  "무력함, 우울감, 그리고 ‘나는 할 수 없다’는 생각에 의해 지배되는 상황에서 벗어나기 위한 한 가지 유용한 기술은 우리가 분투하고 있는 문제를 해결해 본 사람들과 함께 있기로 선택하는 것이다.",
+  "이것은 자조 집단의 큰 힘 중 하나이다.",
+  "우리가 부정적인 상태에 있을 때, 우리는 부정적인 사고 형태에 많은 에너지를 쏟아 왔고 긍정적인 사고 형태는 약하다.",
+  "더 높은 진동에 있는 사람들은 부정적인 사고에서 나오는 에너지로부터 자유롭고 긍정적인 사고 형태를 활성화시킨 상태이다.",
+  "단지 그들과 함께 있는 것만으로도 유익하다.",
+  "일부 자조 집단에서는 이것을 ‘승자들과 어울리기’라고 부른다.",
+  "여기서의 이점은 의식의 정신적 수준에 있으며, 긍정적인 에너지의 전달과 자신의 잠재된 긍정적 사고 형태의 재점화가 일어난다."
+];
+
+let currentIndex = 0;
+let score = 0;
+let originalWords = [];
+let shuffledWords = [];
+
+function splitIntoPhrases(sentence) {
+  let words = sentence.split(" ");
+  let result = [];
+  for (let i = 0; i < words.length; i += 2) {
+    result.push(words.slice(i, i + 2).join(" "));
+  }
+  return result;
+}
+
+function startGame() {
+  currentIndex = 0;
+  score = 0;
+  loadSentence();
+}
+
+function loadSentence() {
+  document.getElementById("questionNumber").innerText = "Question " + (currentIndex + 1) + " / " + sentences.length;
+  document.getElementById("koreanBox").innerText = meanings[currentIndex];
+  originalWords = splitIntoPhrases(sentences[currentIndex]);
+  shuffledWords = [...originalWords];
+  shuffledWords.sort(() => Math.random() - 0.5);
+  document.getElementById("wordBox").innerHTML = "";
+  document.getElementById("answerBox").innerHTML = "";
+  document.getElementById("result").innerText = "";
+  showWords();
+}
+
+function showWords() {
+  let box = document.getElementById("wordBox");
+  shuffledWords.forEach(word => {
+    let btn = document.createElement("button");
+    btn.innerText = word;
+    btn.onclick = function() { addWord(word, btn); };
+    box.appendChild(btn);
+  });
+}
+
+function addWord(word, btn) {
+  let span = document.createElement("span");
+  span.innerText = word;
+  span.className = "answer-word";
+  span.onclick = function() {
+    btn.style.display = "inline-block";
+    span.remove();
+  };
+  document.getElementById("answerBox").appendChild(span);
+  btn.style.display = "none";
+}
+
+function checkAnswer() {
+  let spans = document.querySelectorAll("#answerBox span");
+  let answer = Array.from(spans).map(s => s.innerText).join(" ");
+  let original = originalWords.join(" ");
+  let resultEl = document.getElementById("result");
+
+  if (answer === original) {
+    resultEl.innerText = "정답!Excellent!👏👏👏";
+    resultEl.style.color = "#10b981";
+    correctSound.currentTime = 0;
+    correctSound.play().catch(()=>{});
+  } else {
+    resultEl.innerText = "땡! 틀렸습니다.Try again 💪";
+    resultEl.style.color = "#ef4444";
+    wrongSound.currentTime = 0;
+    wrongSound.play().catch(()=>{});
+  }
+}
+
+function nextSentence() {
+  let spans = document.querySelectorAll("#answerBox span");
+  let answer = Array.from(spans).map(s => s.innerText).join(" ");
+  let original = originalWords.join(" ");
+  if (answer === original) score++;
+  currentIndex++;
+  if (currentIndex < sentences.length) {
+    loadSentence();
+  } else {
+    document.getElementById("koreanBox").innerText = "학습 완료!";
+    document.getElementById("result").innerText = "최종 점수: " + score + " / " + sentences.length;
+    document.getElementById("wordBox").innerHTML = "";
+  }
+}
+</script>
+</body>
+</html>
