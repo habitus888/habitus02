@@ -3,784 +3,760 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Habitus Speaking</title>
+<title>Habitus Speaking - London Street Art</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 :root {
     --primary-color: #4f46e5;
-    --secondary-color: #9333ea;
-    --green-color: #10b981;
-    --bg-color: #f5f7ff;
-    --text-color: #1e293b;
-    --sub-color: #64748b;
+    --primary-light: #eef2ff;
+    --secondary-color: #10b981;
+    --accent-color: #f59e0b;
+    --text-dark: #1e293b;
+    --text-gray: #64748b;
+    --border: #e2e8f0;
+    --bg: #f5f7ff;
 }
 
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #f5f7ff 0%, #e4eaff 100%);
     font-family: 'Poppins', 'Noto Sans KR', sans-serif;
-    color: var(--text-color);
+    background: linear-gradient(135deg, #f5f7ff 0%, #e4eaff 100%);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
-
-/* HEADER */
 
 .header {
     height: 70px;
     background: white;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    padding: 0 24px;
     position: relative;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .text-logo {
-    position: absolute;
-    left: 20px;
     font-size: 22px;
-    font-weight: 800;
-    background: linear-gradient(135deg, #ff6a97 0%, #9333ea 100%);
+    font-weight: 900;
+    background: linear-gradient(135deg, #ff6a97, #9333ea);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-btn {
+    background: #f1f5f9;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: 0.15s;
+}
+.icon-btn.active {
+    background: var(--primary-light);
+    color: var(--primary-color);
+}
+.icon-btn.bookmarked {
+    background: #fef3c7;
+    color: #d97706;
+}
+
 .title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 800;
     background: linear-gradient(to right, #4f46e5, #9333ea);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* MAIN */
-
 .container {
     max-width: 760px;
-    margin: 35px auto;
+    width: 100%;
+    margin: 30px auto;
+    padding: 30px;
     background: white;
-    padding: 35px;
     border-radius: 25px;
     box-shadow: 0 10px 30px rgba(79,70,229,0.08);
 }
-
-/* 진행 상황 */
 
 .progress-area {
     margin-bottom: 25px;
 }
 
-#sentenceNumber {
-    font-size: 14px;
-    color: #94a3b8;
-    font-weight: 600;
+.progress-text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--text-gray);
+    margin-bottom: 8px;
 }
 
 .progress-bar {
     width: 100%;
-    height: 7px;
-    background: #eef2ff;
+    height: 8px;
+    background: #e2e8f0;
     border-radius: 10px;
-    margin-top: 10px;
     overflow: hidden;
 }
 
-#progress {
+.progress-fill {
     height: 100%;
     width: 0%;
     background: linear-gradient(to right, #4f46e5, #9333ea);
-    border-radius: 10px;
-    transition: width 0.3s;
+    transition: width 0.3s ease;
 }
 
-/* 회차 */
-
-.round-box {
-    margin: 20px auto;
+.round-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0 10px 0;
 }
 
-#roundNumber {
+.round-badge-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.round-badge {
     display: inline-block;
-    padding: 8px 20px;
+    padding: 6px 14px;
     border-radius: 30px;
-    background: #eef2ff;
+    background: var(--primary-light);
     color: var(--primary-color);
-    font-size: 16px;
-    font-weight: 800;
+    font-size: 13px;
+    font-weight: 700;
 }
 
-#roundGuide {
-    margin-top: 12px;
-    color: var(--sub-color);
-    font-size: 15px;
+.mode-toggle {
+    display: none;
+    font-size: 12px;
+    padding: 4px 10px;
+    background: #f1f5f9;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-gray);
+}
+.mode-toggle.active {
+    background: #e0e7ff;
+    color: var(--primary-color);
+    border-color: #c7d2fe;
 }
 
-/* 영어 문장 */
+.instruction {
+    font-size: 13px;
+    color: var(--text-gray);
+    margin-bottom: 15px;
+}
+
+.sentence-box {
+    margin: 15px 0 25px 0;
+    padding: 30px 25px;
+    background: #fafbff;
+    border: 2px solid #eef2ff;
+    border-radius: 20px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.tts-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+    transition: 0.15s;
+}
+.tts-btn:hover {
+    background: var(--primary-light);
+    border-color: var(--primary-color);
+}
 
 #sentenceDisplay {
-    margin: 35px 0 20px;
-    font-size: 26px;
-    line-height: 1.8;
+    font-size: 23px;
+    line-height: 1.7;
     font-weight: 700;
     color: var(--primary-color);
     word-break: keep-all;
+    padding-right: 30px;
 }
 
-/* 가려진 단어 */
+#koreanTranslate {
+    margin-top: 15px;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-gray);
+    word-break: keep-all;
+}
 
 .hidden-word {
     display: inline-block;
-    min-width: 45px;
-    height: 1.1em;
+    min-width: 50px;
     margin: 0 3px;
-    vertical-align: middle;
-    background: #cbd5e1;
-    border-radius: 5px;
+    padding: 0 8px;
     color: transparent;
+    background: #c7d2fe;
+    border-radius: 5px;
+    user-select: none;
 }
 
-/* 해석 */
-
-#koreanTranslate {
-    font-size: 17px;
-    line-height: 1.7;
-    color: #64748b;
-    margin-bottom: 30px;
+.hint-word {
+    display: inline-block;
+    margin: 0 3px;
+    padding: 0 6px;
+    background: #e0e7ff;
+    border-radius: 5px;
+    border-bottom: 2px dashed var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 700;
 }
-
-/* 버튼 */
 
 .controls {
     display: flex;
     justify-content: center;
     gap: 12px;
-    flex-wrap: wrap;
     margin-top: 25px;
 }
 
-.round-btn {
+.main-btn {
     border: none;
-    padding: 13px 22px;
     border-radius: 12px;
+    padding: 14px 22px;
     font-family: inherit;
-    font-weight: 700;
     font-size: 15px;
+    font-weight: 700;
     cursor: pointer;
-    transition: 0.2s;
-    background: #eef2ff;
-    color: #4f46e5;
+    transition: 0.15s;
 }
 
-.round-btn:hover {
-    transform: translateY(-2px);
+.main-btn:active {
+    transform: scale(0.97);
 }
 
-.round-btn.active {
-    background: #4f46e5;
+.prev {
+    background: #e2e8f0;
+    color: #475569;
+}
+
+.next {
+    background: var(--primary-color);
     color: white;
 }
 
-.next-btn {
-    display: block;
-    width: 100%;
-    margin-top: 25px;
-    padding: 16px;
-    border: none;
-    border-radius: 13px;
-    background: linear-gradient(to right, #4f46e5, #9333ea);
+.complete {
+    background: var(--secondary-color);
     color: white;
-    font-family: inherit;
-    font-size: 17px;
-    font-weight: 800;
-    cursor: pointer;
-}
-
-.next-btn:hover {
-    opacity: 0.92;
-}
-
-.next-btn:disabled {
-    background: #cbd5e1;
-    cursor: not-allowed;
-}
-
-/* 3회차 안내 */
-
-.third-guide {
     display: none;
-    margin-top: 18px;
-    padding: 12px;
-    border-radius: 10px;
-    background: #ecfdf5;
-    color: #047857;
-    font-size: 14px;
-    font-weight: 600;
 }
 
-/* FOOTER */
+.round-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.round-dot {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.round-dot.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.round-dot.done {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.tip {
+    margin-top: 25px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #64748b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 .footer {
     text-align: center;
-    color: #94a3b8;
+    margin: 30px 0;
     font-size: 11px;
-    padding-bottom: 25px;
+    color: #94a3b8;
 }
-
-/* 모바일 */
 
 @media (max-width: 600px) {
-
-    .container {
-        margin: 20px 12px;
-        padding: 25px 18px;
-    }
-
-    .text-logo {
-        font-size: 17px;
-        left: 10px;
-    }
-
-    .title {
-        font-size: 16px;
-    }
-
-    #sentenceDisplay {
-        font-size: 21px;
-        line-height: 1.7;
-    }
-
-    #koreanTranslate {
-        font-size: 15px;
-    }
-
-    .round-btn {
-        flex: 1;
-        padding: 12px 8px;
-    }
+    .container { margin: 15px; padding: 20px; border-radius: 20px; }
+    .text-logo { font-size: 17px; }
+    .title { display: none; }
+    #sentenceDisplay { font-size: 20px; }
+    #koreanTranslate { font-size: 14px; }
+    .main-btn { padding: 12px 16px; font-size: 14px; }
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="header">
-
     <div class="text-logo">Habitus</div>
-
-    <div class="title">
-        Habitus Speaking
+    <div class="title">Habitus Speaking - Street Art</div>
+    <div class="header-right">
+        <button id="bookmarkFilterBtn" class="icon-btn" onclick="toggleBookmarkFilter()">⭐ 북마크 모아보기</button>
+        <button id="autoPlayBtn" class="icon-btn" onclick="toggleAutoPlay()">⏱️ 오토플레이</button>
     </div>
-
 </div>
-
 
 <div class="container">
-
-    <!-- 진행 상황 -->
-
     <div class="progress-area">
-
-        <div id="sentenceNumber">
-            Sentence 1 / 28
+        <div class="progress-text">
+            <span id="progressText">Sentence 1 / 28</span>
+            <span id="percentText">0%</span>
         </div>
-
         <div class="progress-bar">
-            <div id="progress"></div>
+            <div id="progressFill" class="progress-fill"></div>
         </div>
-
     </div>
 
-
-    <!-- 회차 -->
-
-    <div class="round-box">
-
-        <div id="roundNumber">
-            1회차
+    <div class="round-area">
+        <div class="round-badge-group">
+            <div id="roundBadge" class="round-badge">1회차</div>
+            <button id="hintModeBtn" class="mode-toggle" onclick="toggleHintMode()">첫글자 힌트 모드</button>
         </div>
-
-        <div id="roundGuide">
-            문장을 보고 정확하게 소리 내어 읽어 보세요.
-        </div>
-
+        <button id="bookmarkBtn" class="icon-btn" onclick="toggleCurrentBookmark()">☆ 북마크</button>
+    </div>
+    
+    <div id="instruction" class="instruction">
+        영어 문장과 뜻을 보며 소리 내어 읽어 보세요.
     </div>
 
-
-    <!-- 영어 -->
-
-    <div id="sentenceDisplay">
-        Loading...
+    <div class="sentence-box">
+        <button class="tts-btn" onclick="playTTS()" title="원어민 발음 듣기">🔊</button>
+        <div id="sentenceDisplay">Loading...</div>
+        <div id="koreanTranslate">...</div>
     </div>
 
-
-    <!-- 해석 -->
-
-    <div id="koreanTranslate">
-        ...
+    <div class="round-buttons">
+        <div id="round1" class="round-dot active">1</div>
+        <div id="round2" class="round-dot">2</div>
+        <div id="round3" class="round-dot">3</div>
     </div>
-
-
-    <!-- 3회차 안내 -->
-
-    <div id="thirdGuide" class="third-guide">
-        일부 단어가 가려졌습니다. 기억해서 문장을 완성하며 읽어 보세요.
-    </div>
-
-
-    <!-- 회차 선택 -->
 
     <div class="controls">
-
-        <button
-            id="round1Btn"
-            class="round-btn active"
-            onclick="setRound(1)">
-            1회차
-        </button>
-
-        <button
-            id="round2Btn"
-            class="round-btn"
-            onclick="setRound(2)">
-            2회차
-        </button>
-
-        <button
-            id="round3Btn"
-            class="round-btn"
-            onclick="setRound(3)">
-            3회차
-        </button>
-
+        <button id="prevBtn" class="main-btn prev" onclick="previousSentence()">← 이전 문장</button>
+        <button id="nextBtn" class="main-btn next" onclick="nextStep()">다음 회차 →</button>
+        <button id="completeBtn" class="main-btn complete" onclick="nextSentence()">다음 문장 →</button>
     </div>
 
-
-    <!-- 다음 문장 -->
-
-    <button
-        id="nextBtn"
-        class="next-btn"
-        onclick="nextSentence()">
-
-        다음 문장 →
-
-    </button>
-
+    <div class="tip">
+        <div>
+            <strong>Speaking 3-Step</strong><br>
+            ① 뜻 보며 읽기 → ② 영어만 보기 → ③ 빈칸/힌트 연상하며 읽기
+        </div>
+    </div>
 </div>
-
 
 <div class="footer">
     ⓒ Violet Youn Habitus. All Rights Reserved.
 </div>
 
-
 <script>
-
-/* =========================================================
-   문장
-========================================================= */
-
 const sentences = [
-
-  {
-    en: "Modern street art comes in many different forms, and it makes cities colorful and lively.",
-    ko: "현대 거리 예술은 여러 다양한 형태로 존재하며, 도시를 다채롭고 활기차게 만듭니다."
-  },
-
-  {
-    en: "Today, we are going to see some well-known street artworks in London.",
-    ko: "오늘, 우리는 런던에 있는 몇몇 유명한 거리 예술 작품들을 살펴보겠습니다."
-  },
-
-  {
-    en: "The place that we are going to visit is Shoreditch.",
-    ko: "우리가 방문할 장소는 Shoreditch입니다."
-  },
-
-  {
-    en: "Poor workers used to live in this area, but now it is one of the hippest areas in London.",
-    ko: "가난한 노동자들이 이 지역에 살았었지만, 지금 이곳은 런던에서 가장 힙한 지역 중 하나입니다."
-  },
-
-  {
-    en: "We can find so many great pieces of street art here.",
-    ko: "우리는 이곳에서 정말 많은 멋진 거리 예술 작품들을 볼 수 있습니다."
-  },
-
-  {
-    en: "Do you see the painting over there?",
-    ko: "저쪽에 있는 그림이 보이시나요?"
-  },
-
-  {
-    en: "It is by the artist STIK.",
-    ko: "그것은 예술가 STIK의 작품입니다."
-  },
-
-  {
-    en: "He is famous for using only lines and dots in his paintings of human bodies.",
-    ko: "그는 인체를 그린 그림에서 선과 점만을 사용하는 것으로 유명합니다."
-  },
-
-  {
-    en: "According to STIK, the three figures represent the past, present, and future of Shoreditch.",
-    ko: "STIK에 따르면, 저 세 인물은 Shoreditch의 과거, 현재, 그리고 미래를 나타냅니다."
-  },
-
-  {
-    en: "Which figure represents which?",
-    ko: "어떤 인물이 어떤 것을 나타낼까요?"
-  },
-
-  {
-    en: "Well, look closely at the eyes of the three figures.",
-    ko: "자, 세 인물의 눈을 자세히 보세요."
-  },
-
-  {
-    en: "They are just dots, but they will give you a clue.",
-    ko: "그것들은 그저 점이지만, 그것들이 여러분에게 단서를 줄 것입니다."
-  },
-
-  {
-    en: "We are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist.",
-    ko: "우리는 이제 국제적으로 유명한 거리 예술가 Banksy의 그림을 보기 위해 Finsbury 공원에 있습니다."
-  },
-
-  {
-    en: "Banksy’s artworks often carry social messages, and the green tree you see over there is a good example.",
-    ko: "Banksy의 예술 작품들은 종종 사회적 메시지를 담고 있는데, 저쪽에 보이는 초록색 나무가 좋은 예입니다."
-  },
-
-  {
-    en: "As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree.",
-    ko: "보시다시피, 그는 잎이 없는 나무 뒤쪽 벽에 초록색 페인트를 뿌려서 초록색 나무를 만들었습니다."
-  },
-
-  {
-    en: "Next to the tree, there is a person who is holding a sprayer.",
-    ko: "그 나무 옆에는 분무기를 들고 있는 사람이 한 명 있습니다."
-  },
-
-  {
-    en: "What message does Banksy want to give us through this painting?",
-    ko: "Banksy는 이 그림을 통해 우리에게 어떤 메시지를 전하고 싶은 걸까요?"
-  },
-
-  {
-    en: "In many people’s opinion, he is telling us that nature is having a hard time.",
-    ko: "많은 사람들의 의견에 따르면, 그는 자연이 힘든 시간을 보내고 있다는 것을 우리에게 말하려는 것 같습니다."
-  },
-
-  {
-    en: "They think he wants us to take better care of it.",
-    ko: "그들은 우리가 자연을 더 잘 보살피기를 그가 원한다고 생각합니다."
-  },
-
-  {
-    en: "The final stop of our tour today is Muswell Hill.",
-    ko: "오늘 우리 투어의 마지막 방문지는 Muswell Hill입니다."
-  },
-
-  {
-    en: "Can’t see any street artworks?",
-    ko: "어떤 거리 예술 작품도 보이지 않나요?"
-  },
-
-  {
-    en: "Well, look down and look closely.",
-    ko: "그렇다면, 아래를 내려다보고 자세히 살펴보세요."
-  },
-
-  {
-    en: "Do you see the little chewing gum paintings?",
-    ko: "작은 껌 그림들이 보이나요?"
-  },
-
-  {
-    en: "They are by the artist Ben Wilson.",
-    ko: "그것들은 예술가 Ben Wilson의 작품입니다."
-  },
-
-  {
-    en: "Wilson is well known for painting pictures on gum that people drop on the street.",
-    ko: "Wilson은 사람들이 길에 버리는 껌에 그림을 그리는 것으로 잘 알려져 있습니다."
-  },
-
-  {
-    en: "His gum paintings often carry personal messages from people he meets on the street.",
-    ko: "그의 껌 그림들은 종종 그가 길에서 만나는 사람들의 개인적인 메시지를 담고 있습니다."
-  },
-
-  {
-    en: "For example, the one over here is a happy birthday wish for a loved one.",
-    ko: "예를 들어, 여기 있는 것은 사랑하는 사람을 위한 생일 축하 메시지입니다."
-  },
-
-  {
-    en: "Wilson’s gum paintings are tiny, but they give great pleasure to many people.",
-    ko: "Wilson의 껌 그림들은 아주 작지만, 많은 사람들에게 큰 기쁨을 줍니다."
-  }
-
+    { en: "Modern street art comes in many different forms, and it makes cities colorful and lively.", ko: "현대 스트리트 아트는 다양한 형태로 존재하며, 도시를 다채롭고 생기 있게 만들어 준다." },
+    { en: "Today, we are going to see some well-known street artworks in London.", ko: "오늘 우리는 런던의 잘 알려진 몇 가지 스트리트 아트 작품들을 볼 것이다." },
+    { en: "The place that we are going to visit is Shoreditch.", ko: "우리가 방문할 장소는 쇼디치이다." },
+    { en: "Poor workers used to live in this area, but now it is one of the hippest areas in London.", ko: "이 지역에는 예전에 가난한 노동자들이 살았지만, 지금은 런던에서 가장 힙한 지역 중 하나이다." },
+    { en: "We can find so many great pieces of street art here.", ko: "우리는 이곳에서 아주 많은 훌륭한 스트리트 아트 작품들을 찾을 수 있다." },
+    { en: "Do you see the painting over there?", ko: "저쪽에 있는 그림이 보이는가?" },
+    { en: "It is by the artist STIK.", ko: "그것은 아티스트 스틱(STIK)의 작품이다." },
+    { en: "He is famous for using only lines and dots in his paintings of human bodies.", ko: "그는 인체 그림에서 오직 선과 점만 사용하는 것으로 유명하다." },
+    { en: "According to STIK, the three figures represent the past, present, and future of Shoreditch.", ko: "스틱에 따르면, 세 인물은 쇼디치의 과거, 현재, 미래를 나타낸다." },
+    { en: "Which figure represents which?", ko: "어떤 인물이 무엇을 나타내는가?" },
+    { en: "Well, look closely at the eyes of the three figures.", ko: "자, 세 인물의 눈을 자세히 살펴보아라." },
+    { en: "They are just dots, but they will give you a clue.", ko: "그것들은 단지 점들이지만, 당신에게 단서를 줄 것이다." },
+    { en: "We are now in Finsbury Park to see a painting by Banksy, an internationally famous street artist.", ko: "우리는 세계적으로 유명한 스트리트 아티스트인 뱅크시(Banksy)의 그림을 보기 위해 지금 핀즈버리 공원에 와 있다." },
+    { en: "Banksy’s artworks often carry social messages, and the green tree you see over there is a good example.", ko: "뱅크시의 작품들은 종종 사회적 메시지를 담고 있으며, 저쪽에 보이는 초록색 나무가 좋은 예이다." },
+    { en: "As you can see, he created a green tree by spraying green paint on a wall behind a leafless tree.", ko: "보다시피 그는 잎이 없는 나무 뒤쪽 벽에 초록색 페인트를 뿌려 초록색 나무를 만들어냈다." },
+    { en: "Next to the tree, there is a person who is holding a sprayer.", ko: "나무 옆에는 분무기를 들고 있는 사람이 있다." },
+    { en: "What message does Banksy want to give us through this painting?", ko: "뱅크시는 이 그림을 통해 우리에게 어떤 메시지를 전달하고 싶어 하는가?" },
+    { en: "In many people’s opinion, he is telling us that nature is having a hard time.", ko: "많은 사람들의 의견에 따르면, 그는 우리에게 자연이 힘든 시간을 겪고 있다고 말하고 있는 것이다." },
+    { en: "They think he wants us to take better care of it.", ko: "그들은 그가 우리가 자연을 더 잘 돌보기를 원한다고 생각한다." },
+    { en: "The final stop of our tour today is Muswell Hill.", ko: "오늘 우리 투어의 마지막 장소는 머스웰 힐이다." },
+    { en: "Can’t see any street artworks?", ko: "스트리트 아트 작품이 전혀 보이지 않는가?" },
+    { en: "Well, look down and look closely.", ko: "자, 아래를 내려다보고 자세히 살펴보아라." },
+    { en: "Do you see the little chewing gum paintings?", ko: "작은 껌 그림들이 보이는가?" },
+    { en: "They are by the artist Ben Wilson.", ko: "그것들은 아티스트 벤 윌슨(Ben Wilson)의 작품이다." },
+    { en: "Wilson is well known for painting pictures on gum that people drop on the street.", ko: "윌슨은 사람들이 길거리에 버린 껌 위에 그림을 그리는 것으로 잘 알려져 있다." },
+    { en: "His gum paintings often carry personal messages from people he meets on the street.", ko: "그의 껌 그림들은 종종 그가 거리에서 만난 사람들로부터 얻은 개인적인 메시지들을 담고 있다." },
+    { en: "For example, the one over here is a happy birthday wish for a loved one.", ko: "예를 들어, 여기 있는 것은 사랑하는 사람을 위한 생일 축하 메시지이다." },
+    { en: "Wilson’s gum paintings are tiny, but they give great pleasure to many people.", ko: "윌슨의 껌 그림들은 아주 작지만, 많은 사람들에게 큰 기쁨을 준다." }
 ];
 
-
-/* =========================================================
-   현재 상태
-========================================================= */
-
 let currentIndex = 0;
-
 let currentRound = 1;
-
-
-/* =========================================================
-   문장 불러오기
-========================================================= */
+let isHintMode = false;
+let bookmarks = JSON.parse(localStorage.getItem('habitus_bookmarks_london') || '[]');
+let isBookmarkFilterActive = false;
+let activeTargetList = sentences;
+let autoPlayTimer = null;
+let isAutoPlayActive = false;
 
 function loadSentence() {
-
-    const sentence = sentences[currentIndex];
-
-    document.getElementById("sentenceNumber").innerText =
-        `Sentence ${currentIndex + 1} / ${sentences.length}`;
-
-    document.getElementById("koreanTranslate").innerText =
-        sentence.ko;
-
+    const list = isBookmarkFilterActive ? activeTargetList : sentences;
+    if (list.length === 0) {
+        showEmptyBookmark();
+        return;
+    }
+    if (currentIndex >= list.length) currentIndex = 0;
+    
+    const sentence = list[currentIndex];
+    document.getElementById("koreanTranslate").innerText = sentence.ko;
+    updateRound();
     updateProgress();
-
-    setRound(1);
+    updateBookmarkButtonState();
 }
 
+function updateRound() {
+    const list = isBookmarkFilterActive ? activeTargetList : sentences;
+    if (list.length === 0) return;
+    const sentence = list[currentIndex];
 
-/* =========================================================
-   진행률
-========================================================= */
+    const display = document.getElementById("sentenceDisplay");
+    const badge = document.getElementById("roundBadge");
+    const instruction = document.getElementById("instruction");
+    const hintBtn = document.getElementById("hintModeBtn");
 
-function updateProgress() {
+    hintBtn.style.display = (currentRound === 3) ? "block" : "none";
 
-    const percent =
-        ((currentIndex + 1) / sentences.length) * 100;
+    if (currentRound === 1) {
+        display.innerText = sentence.en;
+        badge.innerText = "1회차";
+        instruction.innerText = "영어 문장과 뜻을 보며 소리 내어 읽어 보세요.";
+    } else if (currentRound === 2) {
+        display.innerText = sentence.en;
+        badge.innerText = "2회차";
+        instruction.innerText = "이번에는 영어 문장만 보고 소리 내어 읽어 보세요.";
+    } else {
+        display.innerHTML = isHintMode ? generateHintWords(sentence.en) : hideWords(sentence.en);
+        badge.innerText = "3회차";
+        instruction.innerText = isHintMode ? "첫 글자 힌트를 보며 문장을 완성해 읽어 보세요." : "가려진 단어를 기억하며 문장 전체를 소리 내어 읽어 보세요.";
+    }
 
-    document.getElementById("progress").style.width =
-        percent + "%";
+    updateRoundDots();
+    updateButtons();
 }
 
-
-/* =========================================================
-   회차 변경
-========================================================= */
-
-function setRound(round) {
-
-    currentRound = round;
-
-    const sentence = sentences[currentIndex];
-
-    const sentenceDisplay =
-        document.getElementById("sentenceDisplay");
-
-    const guide =
-        document.getElementById("roundGuide");
-
-    const thirdGuide =
-        document.getElementById("thirdGuide");
-
-    /* 버튼 상태 */
-
-    document.getElementById("round1Btn")
-        .classList.remove("active");
-
-    document.getElementById("round2Btn")
-        .classList.remove("active");
-
-    document.getElementById("round3Btn")
-        .classList.remove("active");
-
-    document.getElementById(`round${round}Btn`)
-        .classList.add("active");
-
-
-    /* 회차 표시 */
-
-    document.getElementById("roundNumber").innerText =
-        `${round}회차`;
-
-
-    /* 1회차 */
-
-    if (round === 1) {
-
-        sentenceDisplay.innerText =
-            sentence.en;
-
-        guide.innerText =
-            "문장을 보고 정확하게 소리 내어 읽어 보세요.";
-
-        thirdGuide.style.display = "none";
-    }
-
-
-    /* 2회차 */
-
-    if (round === 2) {
-
-        sentenceDisplay.innerText =
-            sentence.en;
-
-        guide.innerText =
-            "같은 문장을 한 번 더 읽어 보세요.";
-
-        thirdGuide.style.display = "none";
-    }
-
-
-    /* 3회차 */
-
-    if (round === 3) {
-
-        sentenceDisplay.innerHTML =
-            createHiddenSentence(sentence.en);
-
-        guide.innerText =
-            "가려진 부분을 기억해서 문장을 완성하며 읽어 보세요.";
-
-        thirdGuide.style.display = "block";
-    }
-
-}
-
-
-/* =========================================================
-   3회차 일부 가리기
-========================================================= */
-
-function createHiddenSentence(sentence) {
-
+// 3회차 블라인드 로직
+function hideWords(sentence) {
     const words = sentence.split(" ");
+    const candidates = [];
+    words.forEach((word, index) => {
+        const cleanWord = word.replace(/[^a-zA-Z]/g, "");
+        if (cleanWord.length >= 4) candidates.push(index);
+    });
 
-    /*
-       문장이 짧으면 약 30%,
-       긴 문장은 약 35% 정도 가림
-    */
-
-    let hideCount =
-        Math.max(1, Math.floor(words.length * 0.35));
-
-
-    /*
-       문장 앞부분과 마지막 단어는
-       가능하면 가리지 않도록 함
-    */
-
-    let availableIndexes = [];
-
-    for (let i = 1; i < words.length - 1; i++) {
-        availableIndexes.push(i);
+    const hideCount = Math.max(1, Math.floor(candidates.length * 0.35));
+    const hideIndexes = [];
+    for (let i = 0; i < hideCount; i++) {
+        const position = Math.floor(i * candidates.length / hideCount);
+        hideIndexes.push(candidates[position]);
     }
-
-
-    /*
-       매 문장마다 가리는 위치를
-       조금 다르게 만들기 위해 섞기
-    */
-
-    availableIndexes.sort(() => Math.random() - 0.5);
-
-
-    const hiddenIndexes =
-        availableIndexes.slice(0, hideCount);
-
 
     return words.map((word, index) => {
-
-        if (hiddenIndexes.includes(index)) {
-
-            /*
-              단어 길이에 따라 가림 상자의
-              길이도 조금씩 다르게 설정
-            */
-
-            const cleanWord =
-                word.replace(/[.,!?'"“”‘’]/g, "");
-
-            const width =
-                Math.max(35, cleanWord.length * 11);
-
-            return `
-                <span
-                    class="hidden-word"
-                    style="min-width:${width}px">
-                </span>
-            `;
-
+        if (hideIndexes.includes(index)) {
+            const cleanWord = word.replace(/[^a-zA-Z]/g, "");
+            const punctuation = word.replace(/[a-zA-Z]/g, "");
+            return `<span class="hidden-word" style="min-width:${Math.max(45, cleanWord.length * 10)}px">${cleanWord}</span>${punctuation}`;
         }
-
         return word;
-
     }).join(" ");
-
 }
 
+// 첫 글자 힌트 모드 로직
+function generateHintWords(sentence) {
+    const words = sentence.split(" ");
+    const candidates = [];
+    words.forEach((word, index) => {
+        const cleanWord = word.replace(/[^a-zA-Z]/g, "");
+        if (cleanWord.length >= 4) candidates.push(index);
+    });
 
-/* =========================================================
-   다음 문장
-========================================================= */
+    const hideCount = Math.max(1, Math.floor(candidates.length * 0.35));
+    const hideIndexes = [];
+    for (let i = 0; i < hideCount; i++) {
+        const position = Math.floor(i * candidates.length / hideCount);
+        hideIndexes.push(candidates[position]);
+    }
 
-function nextSentence() {
+    return words.map((word, index) => {
+        if (hideIndexes.includes(index)) {
+            const cleanWord = word.replace(/[^a-zA-Z]/g, "");
+            const punctuation = word.replace(/[a-zA-Z]/g, "");
+            const hint = cleanWord[0] + "_".repeat(cleanWord.length - 1);
+            return `<span class="hint-word">${hint}</span>${punctuation}`;
+        }
+        return word;
+    }).join(" ");
+}
 
-    /*
-       3회차까지 읽지 않았다면
-       다음 문장으로 바로 넘어가지 않도록 함
-    */
+function toggleHintMode() {
+    isHintMode = !isHintMode;
+    const btn = document.getElementById("hintModeBtn");
+    if (isHintMode) {
+        btn.classList.add("active");
+        btn.innerText = "전체 가리기 모드";
+    } else {
+        btn.classList.remove("active");
+        btn.innerText = "첫글자 힌트 모드";
+    }
+    updateRound();
+}
+
+// TTS 원어민 발음 재생
+function playTTS() {
+    const list = isBookmarkFilterActive ? activeTargetList : sentences;
+    if (list.length === 0) return;
+    const text = list[currentIndex].en;
+    
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        window.speechSynthesis.speak(utterance);
+    }
+}
+
+// 북마크 기능
+function toggleCurrentBookmark() {
+    const list = isBookmarkFilterActive ? activeTargetList : sentences;
+    if (list.length === 0) return;
+    const currentSentence = list[currentIndex];
+    
+    const index = bookmarks.findIndex(s => s.en === currentSentence.en);
+    if (index > -1) {
+        bookmarks.splice(index, 1);
+    } else {
+        bookmarks.push(currentSentence);
+    }
+    localStorage.setItem('habitus_bookmarks_london', JSON.stringify(bookmarks));
+    updateBookmarkButtonState();
+}
+
+function updateBookmarkButtonState() {
+    const list = isBookmarkFilterActive ? activeTargetList : sentences;
+    const btn = document.getElementById("bookmarkBtn");
+    if (list.length === 0) return;
+    const currentSentence = list[currentIndex];
+    
+    const isBookmarked = bookmarks.some(s => s.en === currentSentence.en);
+    if (isBookmarked) {
+        btn.innerText = "★ 북마크 해제";
+        btn.classList.add("bookmarked");
+    } else {
+        btn.innerText = "☆ 북마크";
+        btn.classList.remove("bookmarked");
+    }
+}
+
+function toggleBookmarkFilter() {
+    isBookmarkFilterActive = !isBookmarkFilterActive;
+    const filterBtn = document.getElementById("bookmarkFilterBtn");
+    
+    if (isBookmarkFilterActive) {
+        filterBtn.classList.add("active");
+        activeTargetList = bookmarks;
+        currentIndex = 0;
+        currentRound = 1;
+        loadSentence();
+    } else {
+        filterBtn.classList.remove("active");
+        activeTargetList = sentences;
+        currentIndex = 0;
+        currentRound = 1;
+        loadSentence();
+    }
+}
+
+function showEmptyBookmark() {
+    document.querySelector(".sentence-box").innerHTML = `
+        <div style="font-size:40px; margin-bottom:10px;">⭐</div>
+        <div style="font-size:20px; font-weight:700; color:var(--primary-color);">저장된 북마크가 없습니다</div>
+        <div style="margin-top:10px; font-size:14px; color:var(--text-gray);">어려운 문장에 북마크를 추가해 집중 학습해보세요!</div>
+    `;
+    document.getElementById("koreanTranslate").innerText = "";
+    document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("completeBtn").style.display = "none";
+}
+
+// 오토 플레이 타이머 기능
+function toggleAutoPlay() {
+    isAutoPlayActive = !isAutoPlayActive;
+    const autoBtn = document.getElementById("autoPlayBtn");
+    
+    if (isAutoPlayActive) {
+        autoBtn.classList.add("active");
+        autoBtn.innerText = "⏸️ 오토플레이 중";
+        runAutoPlayStep();
+    } else {
+        autoBtn.classList.remove("active");
+        autoBtn.innerText = "⏱️ 오토플레이";
+        clearTimeout(autoPlayTimer);
+    }
+}
+
+function runAutoPlayStep() {
+    if (!isAutoPlayActive) return;
+    playTTS();
+    
+    autoPlayTimer = setTimeout(() => {
+        if (!isAutoPlayActive) return;
+        if (currentRound < 3) {
+            nextStep();
+            runAutoPlayStep();
+        } else {
+            if (currentIndex < (isBookmarkFilterActive ? activeTargetList.length : sentences.length) - 1) {
+                nextSentence();
+                runAutoPlayStep();
+            } else {
+                toggleAutoPlay(); // 종료
+            }
+        }
+    }, 6000); // 6초 간격
+}
+
+// 회차 및 문장 이동
+function updateRoundDots() {
+    for (let i = 1; i <= 3; i++) {
+        const dot = document.getElementById("round" + i);
+        dot.classList.remove("active", "done");
+        if (i < currentRound) dot.classList.add("done");
+        if (i === currentRound) dot.classList.add("active");
+    }
+}
+
+function updateButtons() {
+    const nextBtn = document.getElementById("nextBtn");
+    const completeBtn = document.getElementById("completeBtn");
 
     if (currentRound < 3) {
-
-        const nextRound = currentRound + 1;
-
-        setRound(nextRound);
-
-        return;
+        nextBtn.style.display = "block";
+        completeBtn.style.display = "none";
+        nextBtn.innerText = "다음 회차 →";
+    } else {
+        nextBtn.style.display = "none";
+        completeBtn.style.display = "block";
+        completeBtn.innerText = "다음 문장 →";
     }
-
-
-    /*
-       마지막 문장
-    */
-
-    if (currentIndex === sentences.length - 1) {
-
-        alert(
-            "모든 문장을 3회씩 읽었습니다! 🎉\n\n정말 잘했습니다."
-        );
-
-        return;
-    }
-
-
-    currentIndex++;
-
-    loadSentence();
-
 }
 
+function nextStep() {
+    if (currentRound < 3) {
+        currentRound++;
+        updateRound();
+    }
+}
 
-/* =========================================================
-   시작
-========================================================= */
+function nextSentence() {
+    const list = isBookmarkFilterActive ? activeTargetList : sentences;
+    if (currentIndex < list.length - 1) {
+        currentIndex++;
+        currentRound = 1;
+        loadSentence();
+    } else {
+        showCompletion();
+    }
+}
 
+function previousSentence() {
+    if (currentRound > 1) {
+        currentRound--;
+        updateRound();
+        return;
+    }
+    if (currentIndex > 0) {
+        currentIndex--;
+        currentRound = 3;
+        loadSentence();
+    }
+}
+
+function updateProgress() {
+    const list = isBookmarkFilterActive ? activeTargetList : sentences;
+    const total = list.length;
+    const current = currentIndex + 1;
+
+    document.getElementById("progressText").innerText = isBookmarkFilterActive ? `Bookmark ${current} / ${total}` : `Sentence ${current} / ${total}`;
+    const percent = total > 0 ? Math.round((currentIndex / total) * 100) : 100;
+    document.getElementById("percentText").innerText = `${percent}%`;
+    document.getElementById("progressFill").style.width = `${percent}%`;
+}
+
+function showCompletion() {
+    if (isAutoPlayActive) toggleAutoPlay();
+    document.querySelector(".sentence-box").innerHTML = `
+        <div style="font-size:50px; margin-bottom:15px;">🎉</div>
+        <div style="font-size:28px; font-weight:800; color:#4f46e5;">Great Job!</div>
+        <div style="margin-top:15px; font-size:16px; color:#64748b; line-height:1.7;">모든 학습을 완벽하게 완료했습니다!</div>
+    `;
+    document.getElementById("koreanTranslate").innerText = "오늘의 Speaking Practice를 완료했습니다!";
+    document.getElementById("nextBtn").style.display = "none";
+    document.getElementById("completeBtn").style.display = "none";
+    document.getElementById("prevBtn").innerText = "← 처음으로";
+    document.getElementById("prevBtn").onclick = () => { location.reload(); };
+    document.getElementById("progressFill").style.width = "100%";
+    document.getElementById("percentText").innerText = "100%";
+}
+
+// 초기 실행
 loadSentence();
-
 </script>
 
 </body>
